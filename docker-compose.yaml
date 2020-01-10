@@ -5,9 +5,8 @@ services:
     build: .
     container_name: reactapp
     volumes:
-      - ./api:/usr/src/app/api
+      - ./:/usr/src/app/
       - /usr/src/app/api/node_modules
-      - ./ui:/usr/src/app/ui
       - /usr/src/app/ui/node_modules
     ports:
       - 3000:3000
