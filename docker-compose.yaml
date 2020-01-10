@@ -1,0 +1,43 @@
+version: "2"
+
+services:
+  reactapp:
+    build: .
+    container_name: reactapp
+    volumes:
+      - ./api:/usr/src/app/api
+      - /usr/src/app/api/node_modules
+      - ./ui:/usr/src/app/ui
+      - /usr/src/app/ui/node_modules
+    ports:
+      - 3000:3000
+      - 4000:4000
+      - 9229:9229
+    links: 
+      - mysql
+    # command: tail -F anything
+    command: bash -c 'cd api && npm run start:dev & cd ui && npm start &  tail -F anything'
+    depends_on: 
+      - mysql
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-reactapp
+    environment: 
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes: 
+      - ./data/mysql:/var/lib/mysql
+      - ./logs/mysql:/var/log/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'sc-phpmyadmin'
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - '8080:80'
+    volumes: 
+      - /sessions
