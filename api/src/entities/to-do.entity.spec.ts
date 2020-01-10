@@ -1,7 +1,7 @@
-import { ToDoEntity } from './to-do.entity';
+import { ToDo } from './to-do.entity';
 
-describe('ToDoEntity', () => {
+describe('ToDo', () => {
   it('should be defined', () => {
-    expect(new ToDoEntity()).toBeDefined();
+    expect(new ToDo()).toBeDefined();
   });
 });

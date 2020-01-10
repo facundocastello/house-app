@@ -1,6 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { ToDosService } from './to-dos.service';
-import { ToDo } from 'src/entities/to-do.entity';
+import { ToDo } from '../entities/to-do.entity';
 
 @Controller('to-dos')
 export class ToDosController {
