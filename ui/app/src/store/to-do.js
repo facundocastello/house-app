@@ -10,13 +10,17 @@ export const getToDos = () => (dispatch) =>
     .then((response) => dispatch(recieveToDos(response.data)))
     .catch((error) => console.log(error));
 
+export const createToDo = (data) => (dispatch) =>
+  axios({ url: API + 'to-dos', method: 'POST', data })
+    .then((response) => dispatch(getToDos()))
+    .catch((error) => console.log(error));
+
 export const recieveToDos = (toDos) => ({
   type: RECIEVE_TO_DO,
-  payload: {toDos}
+  payload: { toDos },
 });
 
 export default (state = initialState, { type, payload }) => {
-  
   switch (type) {
     case RECIEVE_TO_DO:
       return { ...state, ...payload };
