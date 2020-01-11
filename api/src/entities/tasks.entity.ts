@@ -4,14 +4,12 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
 } from 'typeorm';
-import { User } from './user.entity';
 
 @Entity()
-export class ToDo {
+export class Task {
   @PrimaryGeneratedColumn()
-  to_do_id: number;
+  task_id: number;
 
   @Column()
   title: string;
@@ -19,14 +17,11 @@ export class ToDo {
   @Column('text')
   description: string;
 
-  @Column({type: 'boolean', default: false})
-  done: boolean;
+  @Column()
+  repeat_period: string;
 
-  @Column({type: 'boolean', default: false})
-  expirated: boolean;
-
-  @ManyToOne(type => User, user => user.to_dos)
-  done_by: User;
+  @Column()
+  repeat_interval: number;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
