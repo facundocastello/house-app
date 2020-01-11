@@ -5,15 +5,15 @@ import './index.css';
 import { Provider } from 'react-redux'
 import store from './src/store'
 
-import FirstComponent from './src/FirstComponent';
+import ToDosPage from './src/pages/ToDosPage';
 
 
 class App extends React.Component {
   render() {
     return (
-      <FirstComponent store={store}>
-        asd
-      </FirstComponent>
+      <Provider store={store}>
+        <ToDosPage/>
+      </Provider>
     );
   }
 }

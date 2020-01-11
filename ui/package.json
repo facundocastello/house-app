@@ -3,28 +3,27 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
-  },
   "dependencies": {
     "axios": "^0.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
+    "@babel/preset-stage-2": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-styled-components": "^1.10.6",
     "babel-polyfill": "^6.26.0",
     "css-loader": "^3.2.1",
     "html-webpack-plugin": "^3.2.0",
+    "postcss-loader": "^3.0.0",
     "redux-devtools": "^3.5.0",
     "style-loader": "^1.0.1",
     "webpack": "^4.41.2",
@@ -34,7 +33,10 @@
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --open --host 0.0.0.0 --port 4000",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "webpack"
+    "create": "webpack",
+    "serve": "node server/server.js",
+    "testWithDebug": "node --inspect=0.0.0.0 jest  --runInBand --testTimeout=10000 --watchAll",
+    "build": "webpack -p --env production --process --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
