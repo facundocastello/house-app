@@ -1,7 +1,9 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { TasksService } from './tasks.service';
+import { ApiResponse } from '@nestjs/swagger';
+
 import { Task } from 'src/entities/tasks.entity';
-import { TaskDto } from 'src/dto/task-dto';
+import { TaskDto } from 'src/dto/task.dto';
+import { TasksService } from './tasks.service';
 
 @Controller('tasks')
 export class TasksController {
@@ -12,6 +14,11 @@ export class TasksController {
     return await this.taskService.findAll();
   }
   @Post()
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.'
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   async createTask(@Body() newTask: TaskDto): Promise<Task> {
     return await this.taskService.createTask(newTask);
   }

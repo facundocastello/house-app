@@ -1,18 +1,25 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
+import { ApiResponse } from '@nestjs/swagger';
+
+import { UserDto } from 'src/dto/user.dto';
 import { UsersService } from './users.service';
-import { UserDto } from 'src/dto/user-dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService : UsersService){}
+  constructor(private readonly userService: UsersService) {}
 
   @Get()
-  async getUsers(){
+  async getUsers() {
     return await this.userService.findAll();
   }
 
   @Post()
-  async addUser(@Body() userData: UserDto ){
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.'
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async addUser(@Body() userData: UserDto) {
     return await this.userService.createUser(userData);
   }
 }

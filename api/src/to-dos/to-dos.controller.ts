@@ -1,7 +1,9 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { ToDosService } from './to-dos.service';
+import { ApiResponse } from '@nestjs/swagger';
+
 import { ToDo } from '../entities/to-do.entity';
-import { ToDoDto } from 'src/dto/to-do-dto';
+import { ToDoDto } from 'src/dto/to-do.dto';
+import { ToDosService } from './to-dos.service';
 
 @Controller('to-dos')
 export class ToDosController {
@@ -19,6 +21,8 @@ export class ToDosController {
   }
 
   @Post()
+@ApiResponse({ status: 201, description: 'The record has been successfully created.'})
+@ApiResponse({ status: 403, description: 'Forbidden.'})
   async addToDo(@Body() toDoDto: ToDoDto): Promise<ToDo> {
     // const todos = await
     try {

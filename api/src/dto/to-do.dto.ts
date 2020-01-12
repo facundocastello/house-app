@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsBoolean } from 'class-validator';
+import { IsNotEmpty, IsBoolean, IsNumber } from 'class-validator';
 
 export class ToDoDto {
   @IsNotEmpty()
@@ -8,15 +8,13 @@ export class ToDoDto {
   description: string
   
   @IsBoolean()
-  @IsNotEmpty()
-  done: boolean
+  done?: boolean = false
   
   @IsBoolean()
-  @IsNotEmpty()
-  expirated: boolean
+  expirated?: boolean = false
   
-  @IsNotEmpty()
-  done_by: number
+  @IsNumber()
+  done_by?: number = null
 
   @IsNotEmpty()
   task: number
