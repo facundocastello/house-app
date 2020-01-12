@@ -17,4 +17,7 @@ export class ToDoDto {
   
   @IsNotEmpty()
   done_by: number
+
+  @IsNotEmpty()
+  task: number
 }

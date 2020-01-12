@@ -5,5 +5,9 @@ export default styled.div`
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
-  width: 500px;
+  min-width: 200px;
+  flex: 0 0 47%;
+  @media screen and (min-width: 768px) {
+    flex: 0 0 32%;
+  }
 `;

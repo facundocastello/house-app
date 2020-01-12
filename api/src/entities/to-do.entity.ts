@@ -7,6 +7,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { User } from './user.entity';
+import { Task } from './tasks.entity';
 
 @Entity()
 export class ToDo {
@@ -27,6 +28,9 @@ export class ToDo {
 
   @ManyToOne(type => User, user => user.to_dos)
   done_by: User;
+
+  @ManyToOne(type => Task, task => task.to_dos)
+  task: User;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;

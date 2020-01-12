@@ -6,7 +6,7 @@ import { getData, createData } from '../store/dataManager';
 import Card from '../components/Card';
 import CardContainer from '../components/CardContainer';
 
-const ToDosPage = ({ createData, toDos, getData }) => {
+const TasksPage = ({ createData, tasks, getData }) => {
   const [newTodo, setNewTodo] = useState({
     expirated: false,
     done: false,
@@ -14,10 +14,14 @@ const ToDosPage = ({ createData, toDos, getData }) => {
     task: 1,
   });
   useEffect(() => {
-    getData('toDos');
+    getData('tasks');
   }, [getData]);
 
-  const renderToDos = () => toDos.map((toDo) => <Card>{toDo.title}</Card>);
+  const renderTasks = () => tasks.map((task) => <Card>
+    <div>{task.title}</div>
+    <div>{task.description}</div>
+    <div>{task.created_by.username}</div>
+    </Card>);
 
   return (
     <div>
@@ -48,15 +52,15 @@ const ToDosPage = ({ createData, toDos, getData }) => {
           }
           type='checkbox'
         />
-        <div onClick={() => createData('toDos', newTodo)}>button</div>
+        <div onClick={() => createData('tasks', newTodo)}>button</div>
       </div>
-      <CardContainer>{renderToDos()}</CardContainer>
+      <CardContainer>{renderTasks()}</CardContainer>
     </div>
   );
 };
 
-const mapStateToPops = (state) => ({ toDos: state.dataManager.toDos });
+const mapStateToPops = (state) => ({ tasks: state.dataManager.tasks });
 
 const mapDispatchToProps = { createData, getData };
 
-export default connect(mapStateToPops, mapDispatchToProps)(ToDosPage);
+export default connect(mapStateToPops, mapDispatchToProps)(TasksPage);

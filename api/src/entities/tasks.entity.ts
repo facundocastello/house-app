@@ -4,7 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  ManyToOne,
 } from 'typeorm';
+import { ToDo } from './to-do.entity';
+import { User } from './user.entity';
 
 @Entity()
 export class Task {
@@ -22,6 +26,19 @@ export class Task {
 
   @Column()
   repeat_interval: number;
+
+  @Column()
+  exception_period: string;
+
+  @Column()
+  exception_number: number;
+  
+  @OneToMany(type => ToDo, to_do => to_do.task)
+  to_dos: ToDo[];
+
+  @ManyToOne(type => User, user => user.tasks)
+  created_by: User;
+
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
