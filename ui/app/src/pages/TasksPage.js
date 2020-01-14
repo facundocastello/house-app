@@ -5,6 +5,14 @@ import { getData, createData } from '../store/dataManager';
 
 import Card from '../components/Card';
 import CardContainer from '../components/CardContainer';
+import CenterDiv from '../components/CenterDiv';
+import SpaceAroundDiv from '../components/SpaceAroundDiv';
+import InputsContainer from '../components/InputsContainer';
+import Checkbox from '../components/Checkbox';
+import Input from '../components/Input';
+import Button from '../components/Button';
+import BoxContainer from '../components/BoxContainer';
+import CardItem from '../components/CardItem';
 
 const TasksPage = ({ createData, tasks, getData }) => {
   const [newTodo, setNewTodo] = useState({
@@ -17,43 +25,64 @@ const TasksPage = ({ createData, tasks, getData }) => {
     getData('tasks');
   }, [getData]);
 
-  const renderTasks = () => tasks.map((task) => <Card>
-    <div>{task.title}</div>
-    <div>{task.description}</div>
-    <div>{task.created_by.username}</div>
-    </Card>);
+  const renderTasks = () =>
+    tasks.map((task) => (
+      <Card>
+        <CardItem  column={1} center bold>
+          {task.title}
+        </CardItem>
+        <CardItem column={2}>{task.description}</CardItem>
+        <CardItem column={2}>{task.created_by.username}</CardItem>
+      </Card>
+    ));
 
   return (
     <div>
-      <div>
-        <input
-          onChange={(event) =>
-            setNewTodo({ ...newTodo, title: event.target.value })
-          }
-          placeholder='title'
-          type='text'
-        />
-        <input
-          onChange={(event) =>
-            setNewTodo({ ...newTodo, description: event.target.value })
-          }
-          placeholder='description'
-          type='text'
-        />
-        <input
-          onChange={(event) =>
-            setNewTodo({ ...newTodo, done: event.target.checked })
-          }
-          type='checkbox'
-        />
-        <input
-          onChange={(event) =>
-            setNewTodo({ ...newTodo, expirated: event.target.checked })
-          }
-          type='checkbox'
-        />
-        <div onClick={() => createData('tasks', newTodo)}>button</div>
-      </div>
+      <CenterDiv>
+        <BoxContainer width='95%' widthLG='50%'>
+          <SpaceAroundDiv
+            style={{ alignItems: 'center', marginBottom: '10px' }}
+          >
+            <h2>Add To Do</h2>
+          </SpaceAroundDiv>
+          <InputsContainer>
+            <Input
+              onChange={(event) =>
+                setNewTodo({ ...newTodo, title: event.target.value })
+              }
+              placeholder='Title'
+              type='text'
+            />
+            <Input
+              onChange={(event) =>
+                setNewTodo({ ...newTodo, description: event.target.value })
+              }
+              placeholder='Description'
+              type='text'
+            />
+            <Checkbox
+              checked={newTodo.done}
+              placeholder='Done'
+              onChange={(event) =>
+                setNewTodo({ ...newTodo, done: event.target.checked })
+              }
+            />
+            <Checkbox
+              checked={newTodo.expirated}
+              placeholder='Expirated'
+              onChange={(event) =>
+                setNewTodo({ ...newTodo, expirated: event.target.checked })
+              }
+            />
+          </InputsContainer>
+
+          <SpaceAroundDiv style={{ alignItems: 'center', margin: '10px 0px' }}>
+            <Button onClick={() => createData('tasks', newTodo)}>
+              Add To Do
+            </Button>
+          </SpaceAroundDiv>
+        </BoxContainer>
+      </CenterDiv>
       <CardContainer>{renderTasks()}</CardContainer>
     </div>
   );

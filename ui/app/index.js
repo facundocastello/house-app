@@ -7,14 +7,28 @@ import store from './src/store';
 import ToDosPage from './src/pages/ToDosPage';
 import './index.css';
 import TasksPage from './src/pages/TasksPage';
+import Menu from './src/components/Menu';
+import styled, { createGlobalStyle } from 'styled-components';
+import { colors } from './src/utils/constants';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    color: ${colors.fontColor};
+    margin: 0px; 
+    background-color: ${colors.backgroundColor};
+    width: 100%;
+    height: 100%;
+    font-family: monospace;
+  }
+`;
 
 const App = () => (
   <Provider store={store}>
+    <GlobalStyle />
     <Router>
-      <Link to='/todos'> To Dos </Link>
-      <Link to='/tasks'> Tasks </Link>
-      <Route path="/todos" component={ToDosPage} />
-      <Route path="/tasks" component={TasksPage} />
+      <Menu />
+      <Route path='/todos' component={ToDosPage} />
+      <Route path='/tasks' component={TasksPage} />
     </Router>
   </Provider>
 );
