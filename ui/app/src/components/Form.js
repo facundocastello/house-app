@@ -7,7 +7,7 @@ import Input from './Input';
 import Checkbox from './Checkbox';
 import Button from './Button';
 
-export default ({ fields }) => {
+export default ({ fields, ...props }) => {
   const renderInputs = () =>
     fields.map((field) => {
       const Component = field.checked !== undefined ? Checkbox : Input;
@@ -15,10 +15,7 @@ export default ({ fields }) => {
       return <Component {...field} />;
     });
   return (
-    <BoxContainer>
-      <SpaceAroundDiv style={{ alignItems: 'center', marginBottom: '10px' }}>
-        <h2>Add To Do</h2>
-      </SpaceAroundDiv>
+    <BoxContainer {...props}>
       <InputsContainer>{renderInputs()}</InputsContainer>
 
       <SpaceAroundDiv style={{ alignItems: 'center', margin: '10px 0px' }}>

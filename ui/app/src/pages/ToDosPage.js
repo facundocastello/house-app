@@ -18,6 +18,8 @@ const ToDosPage = ({ createData, toDos, getData }) => {
     done_by: 2,
     task: 1,
   });
+  const [showAddToDo, setShowAddToDo] = useState(true);
+  const [showFilters, setShowFilters] = useState(true);
 
   useEffect(() => {
     getData('toDos');
@@ -66,8 +68,15 @@ const ToDosPage = ({ createData, toDos, getData }) => {
               placeholder: 'Expirated',
             },
           ]}
+          title={`Add To Do`}
+          showContent={showAddToDo}
+          triggerContent={() => setShowAddToDo(!showAddToDo)}
         />
-        <BoxContainer padding='10px'>
+        <BoxContainer
+          title={`Filters`}
+          showContent={showFilters}
+          triggerContent={() => setShowFilters(!showFilters)}
+        >
           <CenterDiv>
             <Button>done</Button>
             <Button>not done</Button>

@@ -15,6 +15,7 @@ const Text = styled.input`
   margin: 5px;
   width: 170px;
   border-radius: 3px;
+  font-family: monospace;
 `;
 
 const TextArea = styled.textarea`

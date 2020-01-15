@@ -6,21 +6,19 @@ import { getData, createData } from '../store/dataManager';
 import Card from '../components/Card';
 import CardContainer from '../components/CardContainer';
 import CenterDiv from '../components/CenterDiv';
-import SpaceAroundDiv from '../components/SpaceAroundDiv';
-import InputsContainer from '../components/InputsContainer';
-import Checkbox from '../components/Checkbox';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import BoxContainer from '../components/BoxContainer';
 import CardItem from '../components/CardItem';
+import Form from '../components/Form';
 
 const TasksPage = ({ createData, tasks, getData }) => {
-  const [newTodo, setNewTodo] = useState({
+  const [NewTask, setNewTask] = useState({
     expirated: false,
     done: false,
     done_by: 2,
     task: 1,
   });
+  const [showAddTask, setShowAddTask] = useState(true);
+  const [showFilters, setShowFilters] = useState(true);
+
   useEffect(() => {
     getData('tasks');
   }, [getData]);
@@ -35,7 +33,9 @@ const TasksPage = ({ createData, tasks, getData }) => {
         <CardItem column={1} center bold fontLg>
           {task.title}
         </CardItem>
-        <CardItem column={2} fontLg>{task.description}</CardItem>
+        <CardItem column={2} fontLg>
+          {task.description}
+        </CardItem>
         <CardItem column={2}>{task.created_by.username}</CardItem>
       </Card>
     ));
@@ -43,49 +43,36 @@ const TasksPage = ({ createData, tasks, getData }) => {
   return (
     <div>
       <CenterDiv>
-        <BoxContainer>
-          <SpaceAroundDiv
-            style={{ alignItems: 'center', marginBottom: '10px' }}
-          >
-            <h2>Add To Do</h2>
-          </SpaceAroundDiv>
-          <InputsContainer>
-            <Input
-              onChange={(event) =>
-                setNewTodo({ ...newTodo, title: event.target.value })
-              }
-              placeholder='Title'
-              type='text'
-            />
-            <Input
-              onChange={(event) =>
-                setNewTodo({ ...newTodo, description: event.target.value })
-              }
-              placeholder='Description'
-              type='text'
-            />
-            <Checkbox
-              checked={newTodo.done}
-              placeholder='Done'
-              onChange={(event) =>
-                setNewTodo({ ...newTodo, done: event.target.checked })
-              }
-            />
-            <Checkbox
-              checked={newTodo.expirated}
-              placeholder='Expirated'
-              onChange={(event) =>
-                setNewTodo({ ...newTodo, expirated: event.target.checked })
-              }
-            />
-          </InputsContainer>
-
-          <SpaceAroundDiv style={{ alignItems: 'center', margin: '10px 0px' }}>
-            <Button onClick={() => createData('tasks', newTodo)}>
-              Add To Do
-            </Button>
-          </SpaceAroundDiv>
-        </BoxContainer>
+        <Form
+          fields={[
+            {
+              onChange: (event) =>
+                setNewTask({ ...NewTask, title: event.target.value }),
+              placeholder: 'Title',
+            },
+            {
+              onChange: (event) =>
+                setNewTask({ ...NewTask, description: event.target.value }),
+              placeholder: 'Description',
+              type: 'textarea',
+            },
+            {
+              onChange: (event) =>
+                setNewTask({ ...NewTask, done: event.target.checked }),
+              checked: NewTask.done,
+              placeholder: 'Done',
+            },
+            {
+              onChange: (event) =>
+                setNewTask({ ...NewTask, expirated: event.target.checked }),
+              checked: NewTask.expirated,
+              placeholder: 'Expirated',
+            },
+          ]}
+          title={`Add To Do`}
+          showContent={showAddTask}
+          triggerContent={() => setShowAddTask(!showAddTask)}
+        />
       </CenterDiv>
       <CardContainer>{renderTasks()}</CardContainer>
     </div>

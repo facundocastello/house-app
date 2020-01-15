@@ -1,4 +1,4 @@
-import { API } from '../constants';
+import { API } from '../utils/constants';
 import axios from 'axios';
 
 const RECIEVE_DATA = 'dataManager/RECIEVE_DATA';

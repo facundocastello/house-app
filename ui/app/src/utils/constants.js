@@ -33,3 +33,5 @@ export const device = {
   desktop: `(min-width: ${size.desktop})`,
   desktopL: `(min-width: ${size.desktop})`
 };
+
+export const API = 'http://192.168.0.62:3000/';
