@@ -1,13 +1,13 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import dataManager from './dataManager';
 import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
   dataManager,
 });
-
+let store = '';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
+store = createStore(
   reducers,
   /* preloadedState, */ composeEnhancers(applyMiddleware(thunk)),
 );

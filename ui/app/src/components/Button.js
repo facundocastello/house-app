@@ -1,19 +1,23 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import {colors} from '../utils/constants'
+import { colors } from '../utils/constants';
 
 export default styled.div`
   padding: 10px 20px;
-  text-transform: capitalize;
-  background-color: ${colors.bordersColor};
+  background-color: ${(props) =>
+    props.styleType ? colors[props.styleType] : colors.borders};
   border-radius: 4px;
+  box-shadow: 2px 2px 4px;
   color: ${colors.antiFlashWhite};
   font-weight: bold;
-  margin: 1px;
-  :hover{
-    margin: 0;
-    border: 1px solid ${colors.bordersColor};
-    color: ${colors.bordersColor};
-    background-color: ${colors.backgroundColor};
+  text-transform: capitalize;
+  margin: 1px 5px;
+    border: 2px solid ${colors.background};
+  :hover {
+    border: 2px solid
+      ${(props) => (props.styleType ? colors[props.styleType] : colors.borders)};
+    color: ${(props) =>
+      props.styleType ? colors[props.styleType] : colors.borders};
+    background-color: ${colors.background};
   }
-`
+`;

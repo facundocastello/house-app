@@ -5,29 +5,31 @@ import { getData, createData } from '../store/dataManager';
 
 import Card from '../components/Card';
 import CardContainer from '../components/CardContainer';
-import Input from '../components/Input';
 import CenterDiv from '../components/CenterDiv';
 import BoxContainer from '../components/BoxContainer';
-import Button from '../components/Button';
-import SpaceAroundDiv from '../components/SpaceAroundDiv';
-import Checkbox from '../components/Checkbox';
-import InputsContainer from '../components/InputsContainer';
 import CardItem from '../components/CardItem';
+import Form from '../components/Form';
+import Button from '../components/Button';
 
 const ToDosPage = ({ createData, toDos, getData }) => {
   const [newTodo, setNewTodo] = useState({
-    expirated: true,
+    expirated: false,
     done: false,
     done_by: 2,
     task: 1,
   });
+
   useEffect(() => {
     getData('toDos');
   }, [getData]);
 
   const renderToDos = () =>
     toDos.map((toDo) => (
-      <Card>
+      <Card
+        key={`todos-${toDo.to_do_id}`}
+        successButton='mark as done'
+        dangerButton='delete'
+      >
         <CardItem column={1} center bold>
           {toDo.title}
         </CardItem>
@@ -37,47 +39,40 @@ const ToDosPage = ({ createData, toDos, getData }) => {
 
   return (
     <div>
-      <CenterDiv>
-        <BoxContainer width='95%' widthLG='50%'>
-          <SpaceAroundDiv
-            style={{ alignItems: 'center', marginBottom: '10px' }}
-          >
-            <h2>Add To Do</h2>
-          </SpaceAroundDiv>
-          <InputsContainer>
-            <Input
-              onChange={(event) =>
-                setNewTodo({ ...newTodo, title: event.target.value })
-              }
-              placeholder='Title'
-              type='text'
-            />
-            <Input
-              onChange={(event) =>
-                setNewTodo({ ...newTodo, description: event.target.value })
-              }
-              placeholder='Description'
-              type='text'
-            />
-            <Checkbox
-              checked={newTodo.done}
-              onChange={(event) =>
-                setNewTodo({ ...newTodo, done: event.target.checked })
-              }
-            />
-            <Checkbox
-              checked={newTodo.expirated}
-              onChange={(event) =>
-                setNewTodo({ ...newTodo, expirated: event.target.checked })
-              }
-            />
-          </InputsContainer>
-
-          <SpaceAroundDiv style={{ alignItems: 'center', margin: '10px 0px' }}>
-            <Button onClick={() => createData('toDos', newTodo)}>
-              Add To Do
-            </Button>
-          </SpaceAroundDiv>
+      <CenterDiv style={{ flexDirection: 'column' }}>
+        <Form
+          fields={[
+            {
+              onChange: (event) =>
+                setNewTodo({ ...newTodo, title: event.target.value }),
+              placeholder: 'Title',
+            },
+            {
+              onChange: (event) =>
+                setNewTodo({ ...newTodo, description: event.target.value }),
+              placeholder: 'Description',
+              type: 'textarea',
+            },
+            {
+              onChange: (event) =>
+                setNewTodo({ ...newTodo, done: event.target.checked }),
+              checked: newTodo.done,
+              placeholder: 'Done',
+            },
+            {
+              onChange: (event) =>
+                setNewTodo({ ...newTodo, expirated: event.target.checked }),
+              checked: newTodo.expirated,
+              placeholder: 'Expirated',
+            },
+          ]}
+        />
+        <BoxContainer padding='10px'>
+          <CenterDiv>
+            <Button>done</Button>
+            <Button>not done</Button>
+            <Button>other filter</Button>
+          </CenterDiv>
         </BoxContainer>
       </CenterDiv>
       <CardContainer>{renderToDos()}</CardContainer>

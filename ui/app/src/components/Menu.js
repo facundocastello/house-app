@@ -7,7 +7,7 @@ import { colors } from '../utils/constants';
 
 const NavBar = styled.div`
   display: flex;
-  border-bottom: 3px solid ${colors.bordersColor};
+  border-bottom: 3px solid ${colors.borders};
   justify-content: center;
   margin: 0px 10px;
   padding: 10px 0px;
@@ -20,11 +20,11 @@ const LinksContainer = styled.div`
 `;
 
 const Link = styled(NonStyledLink)`
-  color: ${colors.fontColor};
+  color: ${colors.font};
   font-weight: bold;
   text-decoration: none;
   :hover {
-    color: ${colors.bordersColor}
+    color: ${colors.borders}
   }
 `;
 

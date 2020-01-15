@@ -27,11 +27,15 @@ const TasksPage = ({ createData, tasks, getData }) => {
 
   const renderTasks = () =>
     tasks.map((task) => (
-      <Card>
-        <CardItem  column={1} center bold>
+      <Card
+        primaryButton='Edit'
+        dangerButton='Remove'
+        key={`tasks-${task.task_id}`}
+      >
+        <CardItem column={1} center bold fontLg>
           {task.title}
         </CardItem>
-        <CardItem column={2}>{task.description}</CardItem>
+        <CardItem column={2} fontLg>{task.description}</CardItem>
         <CardItem column={2}>{task.created_by.username}</CardItem>
       </Card>
     ));
@@ -39,7 +43,7 @@ const TasksPage = ({ createData, tasks, getData }) => {
   return (
     <div>
       <CenterDiv>
-        <BoxContainer width='95%' widthLG='50%'>
+        <BoxContainer>
           <SpaceAroundDiv
             style={{ alignItems: 'center', marginBottom: '10px' }}
           >

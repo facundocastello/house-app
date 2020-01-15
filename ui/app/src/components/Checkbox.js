@@ -21,16 +21,17 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const checkedStyles = css`
-  background-color: ${colors.backgroundColor};
+  background-color: ${colors.background};
 `;
 const uncheckedStyles = css`
-  background-color: ${colors.backgroundColor};
+  background-color: ${colors.background};
 `;
 
 const Icon = styled.svg`
   fill: none;
-  stroke: ${colors.bordersColor};
+  stroke: ${colors.borders};
   stroke-width: 4px;
+  z-index: 1000;
 `;
 
 const CheckboxContainer = styled.div`
@@ -46,7 +47,7 @@ const StyledCheckbox = styled.div`
   border-radius: 3px;
   transition: all 150ms;
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 2px ${colors.bordersColor};
+    box-shadow: 0 0 0 2px ${colors.borders};
   }
   ${Icon} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
@@ -54,8 +55,15 @@ const StyledCheckbox = styled.div`
   ${(props) => (props.checked ? checkedStyles : uncheckedStyles)};
 `;
 
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+
 export default ({ className, checked, ...props }) => (
-  <div>
+  <InputContainer>
     <Label>{props.placeholder}</Label>
     <label>
       <CheckboxContainer className={className}>
@@ -67,5 +75,5 @@ export default ({ className, checked, ...props }) => (
         </StyledCheckbox>
       </CheckboxContainer>
     </label>
-  </div>
+  </InputContainer>
 );

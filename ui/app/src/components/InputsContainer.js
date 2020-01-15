@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import {colors} from '../utils/constants'
+import { colors } from '../utils/constants';
 
 export default styled.div`
   align-items: center;
@@ -8,9 +8,10 @@ export default styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  @media screen and (min-width: 768px) {
+  @media (min-width: 768px) {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     justify-content: space-around;
   }
-`
+`;

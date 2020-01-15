@@ -13,11 +13,9 @@ import { colors } from './src/utils/constants';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    color: ${colors.fontColor};
+    color: ${colors.font};
     margin: 0px; 
-    background-color: ${colors.backgroundColor};
-    width: 100%;
-    height: 100%;
+    background-color: ${colors.background};
     font-family: monospace;
   }
 `;
